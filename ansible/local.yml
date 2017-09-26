@@ -1,0 +1,17 @@
+- hosts: apps_local
+  become: True
+  gather_facts: True
+  roles:
+    - role: app
+
+- hosts: datas_local
+  become: True
+  gather_facts: True
+  roles:
+    - role: data
+
+- hosts: prometheuses_local
+  become: True
+  gather_facts: True
+  roles:
+    - role: monitoring

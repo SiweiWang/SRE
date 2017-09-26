@@ -1,0 +1,17 @@
+[apps_local]
+app1 ansible_ssh_host=192.168.1.10
+app2 ansible_ssh_host=192.168.1.11
+app3 ansible_ssh_host=192.168.1.12
+
+[datas_local]
+data1 ansible_ssh_host=192.168.1.13
+data2 ansible_ssh_host=192.168.1.14
+data3 ansible_ssh_host=192.168.1.15
+
+[prometheuses_local]
+prometheus ansible_ssh_host=192.168.1.16
+
+[local:children]
+apps_local
+datas_local
+prometheuses_local

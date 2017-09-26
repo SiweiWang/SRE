@@ -1,0 +1,37 @@
+---
+- name: create prometheus dir
+  file:
+    path: "/opt/prometheus"
+    state: directory
+    mode: 0755
+
+- name: create alertmanager dir
+  file:
+    path: "/opt/prometheus/alertmanager"
+    state: directory
+    mode: 0755
+
+- name: create prometheus dir
+  file:
+    path: "/opt/prometheus/{{prometheus_config_file}}"
+    state: directory
+    mode: 0755
+
+- name: copy over dockerfile for nifi
+  template: src=docker-compose.yml.j2 dest=/opt/prometheus/docker-compose.yml mode=0755
+
+- name: copy over alert manager dir for nifi
+  copy: src=alertmanager dest=/opt/prometheus mode=0755 directory_mode=yes
+
+- name: copy over prometheus dir for nifi
+  copy:
+    src: "{{prometheus_config_file}}"
+    dest: "/opt/prometheus"
+    mode: 0755
+    directory_mode: yes
+
+- name: copy over alert manager for nifi
+  copy: src=config.monitoring dest=/opt/prometheus/ mode=0755
+
+- name: start docker compose
+  command: docker-compose -f /opt/prometheus/docker-compose.yml up -d

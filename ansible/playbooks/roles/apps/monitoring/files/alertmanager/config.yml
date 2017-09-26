@@ -1,0 +1,10 @@
+route:
+    receiver: 'slack'
+
+receivers:
+    - name: 'slack'
+      slack_configs:
+          - send_resolved: true
+            username: "{{alertmanager_user_name}}"
+            channel: "{{alertmanager_channel}}"
+            

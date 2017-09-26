@@ -1,0 +1,4 @@
+---
+- debug:
+    msg: "app: it works for {{ansible_distribution_release}}"
+

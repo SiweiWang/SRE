@@ -1,0 +1,8 @@
+## Ansible retry files
+**/.retry
+
+## Python compiled code
+**/.pyc
+
+
+**/.DS_Store
