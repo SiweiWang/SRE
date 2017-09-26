@@ -1,0 +1,7 @@
+---
+dependencies:
+  - { role: docker-engine }
+  - { role: docker-py }
+  - { role: cadviser }
+  - { role: node-exporter }
+  - { role: docker-compose }

@@ -15,3 +15,9 @@
   gather_facts: True
   roles:
     - role: monitoring
+
+- hosts: logging_local
+  become: True
+  gather_facts: True
+  roles:
+    - role: logging

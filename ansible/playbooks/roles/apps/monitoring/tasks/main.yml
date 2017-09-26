@@ -17,13 +17,13 @@
     state: directory
     mode: 0755
 
-- name: copy over dockerfile for nifi
+- name: copy over dockerfile
   template: src=docker-compose.yml.j2 dest=/opt/prometheus/docker-compose.yml mode=0755
 
-- name: copy over alert manager dir for nifi
+- name: copy over alert manager dir
   copy: src=alertmanager dest=/opt/prometheus mode=0755 directory_mode=yes
 
-- name: copy over prometheus dir for nifi
+- name: copy over prometheus dir
   copy:
     src: "{{prometheus_config_file}}"
     dest: "/opt/prometheus"

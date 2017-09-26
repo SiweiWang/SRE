@@ -1,0 +1,23 @@
+---
+- name: create elk dir
+  file:
+    path: "/opt/elk"
+    state: directory
+    mode: 0755
+
+- name: copy over dockerfile
+  template: src=docker-compose.yml.j2 dest=/opt/elk/docker-compose.yml mode=0755
+
+- name: copy over elk dir
+  copy:
+    src: "{{ item }}"
+    dest: /opt/elk 
+    mode: 0755 
+    directory_mode: yes
+  with_items:
+    - elasticsearch
+    - kibana
+    - logstash
+
+- name: start docker compose
+  command: docker-compose -f /opt/prometheus/docker-compose.yml up -d

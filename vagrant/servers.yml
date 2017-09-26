@@ -52,3 +52,10 @@
   cpus: 2
   ip: 192.168.1.16
   shell_path: VagrantProvision/start_vm.sh
+
+- name: logging
+  box: file://Boxes/base.box
+  ram: 3000
+  cpus: 2
+  ip: 192.168.1.17
+  shell_path: VagrantProvision/start_vm.sh
