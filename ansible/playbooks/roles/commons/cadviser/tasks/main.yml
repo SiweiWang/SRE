@@ -1,11 +1,11 @@
 ---
 # Module to start cadvisor
 - name: start cadvisor container
-  docker:
+  docker_container:
     image: google/cadvisor
     name: cadvisor
     state: started
-    pull: always
+    pull: yes
     restart_policy: on-failure
     volumes:
       - /:/rootfs:ro

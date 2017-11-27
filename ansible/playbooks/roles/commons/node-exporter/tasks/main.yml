@@ -15,7 +15,7 @@
   when: node_exporter_exists.stat.exists == False
 
 - name: install node exporter script
-  copy: src=node_exporter.service dest=/etc/systemd/system/node_exporter.service owner=root group=root mode=0755
+  template: src=node_exporter.service.j2 dest=/etc/systemd/system/node_exporter.service owner=root group=root mode=0755
   notify:
   - restart node exporter
 

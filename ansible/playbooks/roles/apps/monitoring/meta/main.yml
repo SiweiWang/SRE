@@ -1,7 +1,7 @@
 ---
 dependencies:
-  - { role: docker-engine }
-  - { role: docker-py }
-  - { role: cadviser }
-  - { role: node-exporter }
-  - { role: docker-compose }
+- { role: playbooks/roles/commons/docker-engine }
+- { role: playbooks/roles/commons/docker-py }
+- { role: playbooks/roles/commons/node-exporter }
+- { role: playbooks/roles/commons/docker-compose }
+- { role: playbooks/roles/commons/cadviser }

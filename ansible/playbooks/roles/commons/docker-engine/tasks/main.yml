@@ -1,18 +1,58 @@
 # Moduel to install docker engine
-- name: add docker apt-key
-  command: apt-key adv --keyserver hkp://p80.pool.sks-keyservers.net:80 --recv-keys 58118E89F3A912897C070ADBF76221572C52609D
+---
+- name: add docker repository.
+  yum_repository:
+    name: dockerrepo
+    description: Docker Repository
+    enabled: yes
+    file: dockers
+    baseurl: "{{ docker_repo_baseurl}}"
+    gpgcheck: yes
+    gpgkey: "{{docker_repo_pgp_keys}}"
 
-- name: add deb repo
-  command: touch /etc/apt/sources.list.d/docker.list
-
-- lineinfile: dest="/etc/apt/sources.list.d/docker.list" line="{{item}}"
+- name: install docker engine.
+  yum: 
+    name: "{{ item }}" 
+    state: installed 
+    update_cache: yes
   with_items:
-    - "deb https://apt.dockerproject.org/repo ubuntu-{{ansible_distribution_release}} main"
+  - docker-engine-{{ docker_version }}
+  - docker-engine-selinux-{{ docker_version }}
+  async: 300
+  poll: 3
 
-- name: apt update
-  apt: update_cache=yes
+- name: create docker engine config dir
+  file: 
+    path: "{{ docker_conf_dir }}"
+    state: directory 
+    mode: 0755
 
-- apt: name=docker-engine state=present
+- name: add docker engine config file
+  template: 
+    src: docker.conf.j2
+    dest: "{{ docker_conf_dir }}/docker.conf"
+    mode: 0755
+  notify:
+  - restart docker
+
+- meta: flush_handlers
+
+- name: start docker
+  service: 
+    name: docker 
+    state: started 
+    enabled: yes
+
+- name: load docker info as facts
+  docker_info_facts:
+
+- debug:
+    msg: "current docker dervice drive is {{ docker_info.Driver }}"
+
+- name: make sure docker is using overlay driver
+  assert:
+    that:
+      - " docker_info.Driver == 'overlay' "
 
 - name: add user mod
   command: sudo usermod -aG docker {{docker_action_user}}

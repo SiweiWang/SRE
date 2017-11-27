@@ -1,5 +1,5 @@
 ## Ansible retry files
-**/.retry
+**/*.retry
 
 ## Python compiled code
 **/.pyc

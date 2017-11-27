@@ -1,16 +1,7 @@
 # Moduel to install docker py which is required to manage docker on host
 ---
-- apt: 
+- yum: 
     name: "{{item}}" 
     state: present
   with_items:
-    - python-setuptools
-    - python-dev
-    - build-essential
-
-- easy_install:
-    name: pip
-    state: latest
-
-- pip:
-    name: docker-py
+    - python-docker-py

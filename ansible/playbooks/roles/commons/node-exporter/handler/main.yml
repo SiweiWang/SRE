@@ -1,2 +1,0 @@
-- name: restart node exporter
-  service: name=node_exporter.service state=restarted daemon_reload=yes enabled=yes

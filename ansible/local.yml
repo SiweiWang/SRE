@@ -2,22 +2,22 @@
   become: True
   gather_facts: True
   roles:
-    - role: app
+    - role: playbooks/roles/apps/app
 
 - hosts: datas_local
   become: True
   gather_facts: True
   roles:
-    - role: data
+    - role: playbooks/roles/apps/data
 
 - hosts: prometheuses_local
   become: True
   gather_facts: True
   roles:
-    - role: monitoring
+    - role: playbooks/roles/apps/monitoring
 
 - hosts: logging_local
   become: True
   gather_facts: True
   roles:
-    - role: logging
+    - role: playbooks/roles/apps/logging
