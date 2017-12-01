@@ -143,7 +143,7 @@ resource "aws_cloudwatch_metric_alarm" "high_cpu_utilization"{
 # define cloud watch alters for low cpu credits
 resource "aws_cloudwatch_metric_alarm" "low_cpu_credit_balance"{
     # cpu credit only applys to t type instance
-    count = "${format("%.1s", var.instance_size) == "t" ? 1 : 0}"
+    count = "${format("%.1s", var.instance_sizeØ) == "t" ? 1 : 0}"
 
     alarm_name = "${var.cluster_name}_low_cpu_credit_balance"
     namespace  = "AWS/EC2"

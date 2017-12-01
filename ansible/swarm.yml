@@ -9,7 +9,7 @@
   become: true
   gather_facts: True
   roles:
-    - role: docker_compose
+    - role: docker-compose
 
 # determine the status of each manager node and break them
 # into two groups:
