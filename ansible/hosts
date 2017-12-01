@@ -23,3 +23,10 @@ logging_local
 192.168.1.10 ansible_ssh_host=192.168.1.10
 192.168.1.11 ansible_ssh_host=192.168.1.11
 192.168.1.12 ansible_ssh_host=192.168.1.12
+
+[workers]
+192.168.1.13 ansible_ssh_host=192.168.1.13
+
+[swarm:children]
+managers
+workers

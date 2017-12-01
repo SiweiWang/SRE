@@ -10,14 +10,17 @@
     gpgcheck: yes
     gpgkey: "{{docker_repo_pgp_keys}}"
 
+- name: add docker yum repo
+  command: yum-config-manager --add-repo https://download.docker.com/linux/centos/docker-ce.repo
+
+
 - name: install docker engine.
   yum: 
     name: "{{ item }}" 
     state: installed 
     update_cache: yes
   with_items:
-  - docker-engine-{{ docker_version }}
-  - docker-engine-selinux-{{ docker_version }}
+  - docker-ce-{{ docker_version }}
   async: 300
   poll: 3
 

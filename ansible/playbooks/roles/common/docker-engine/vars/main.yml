@@ -3,6 +3,6 @@ docker_repo_pgp_keys: https://yum.dockerproject.org/gpg
 
 docker_conf_dir: /etc/systemd/system/docker.service.d
 docker_http_conf_file_name: http-proxy.conf
-docker_version: 17.05.0.ce-1.el7.centos
+docker_version: 17.09.0.ce-1.el7.centos
 docker_device_driver: overlay
 docker_metric_port: 8088

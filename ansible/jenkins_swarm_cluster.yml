@@ -1,0 +1,44 @@
+version: '3.2'
+
+services:
+  master:
+    image: jenkins:2.7.4-alpine
+    deploy:
+      restart_policy:
+        condition: on-failure
+        delay: 5s
+        max_attempts: 3
+        window: 120s
+      placement:
+        constraints:
+          - node.labels.env == jenkins-master
+      resources:
+        limits:
+          memory: 300m
+    ports:
+      - "8082:8080"
+      - "50000:50000"
+    environment:
+      JENKINS_OPTS: "--prefix=/jenkins"
+    volumes:
+      - /home/vagrant:/var/jenkins_home
+  slaves:
+    image: vfarcic/jenkins-swarm-agent
+    environment:
+      - USER_NAME_SECRET=/run/secrets/${JENKINS_USER_SECRET:-jenkins_user}
+      - PASSWORD_SECRET=/run/secrets/${JENKINS_PASS_SECRET:-jenkins_pass}
+      - COMMAND_OPTIONS=-master http://${JENKINS_IP}:8082/jenkins -labels 'docker' -executors 5
+    volumes:
+      - /var/run/docker.sock:/var/run/docker.sock
+      - /home/vagrant:/workspace
+    secrets:
+      - jenkins_user
+      - jenkins_pass
+    deploy:
+      mode: global
+
+secrets:
+  jenkins_user:
+    external: true
+  jenkins_pass:
+    external: true
