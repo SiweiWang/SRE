@@ -1,1 +1,10 @@
-prometheus_config_file: prometheus
+# Ansible Login
+ansible_ssh_user: vagrant
+ansible_ssh_pass: vagrant
+
+docker_action_user: vagrant
+
+alertmanager_user_name: prometheus
+alertmanager_channel: prometheus
+
+swarm_iface: eth1

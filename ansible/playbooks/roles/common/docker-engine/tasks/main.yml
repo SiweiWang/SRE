@@ -55,4 +55,4 @@
       - " docker_info.Driver == 'overlay' "
 
 - name: add user mod
-  command: sudo usermod -aG docker {{docker_action_user}}
+  command: usermod -aG docker {{docker_action_user}}
